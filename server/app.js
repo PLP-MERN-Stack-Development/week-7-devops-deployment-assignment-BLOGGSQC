@@ -1,11 +1,8 @@
-// server/app.js
-
 import express from 'express';
+import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import cors from 'cors';
 import bugRoutes from './routes/bugs.js';
-import errorHandler from './middleware/errorHandler.js';
 
 const app = express();
 
@@ -15,13 +12,18 @@ app.use(helmet());
 app.use(express.json());
 app.use(morgan('dev'));
 
-// Health check
-app.get('/health', (_, res) => res.status(200).send('OK'));
+// Test route for health check
+app.get('/health', (req, res) => {
+  res.send('OK');
+});
 
-// Routes
+// Bug routes
 app.use('/api/bugs', bugRoutes);
 
-// Error handler
-app.use(errorHandler);
+// Error handler (generic)
+app.use((err, req, res, next) => {
+  console.error('❌ Error:', err.stack);
+  res.status(500).json({ message: 'Internal Server Error' });
+});
 
 export default app;
