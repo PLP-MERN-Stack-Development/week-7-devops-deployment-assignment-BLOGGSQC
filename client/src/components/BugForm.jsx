@@ -1,35 +1,38 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
-function BugForm({ onBugCreated }) {
+const BugForm = ({ onSubmit }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = async e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const response = await axios.post('/api/bugs', { title, description });
-    onBugCreated(response.data);
+    if (!title.trim()) return;
+    onSubmit({ title, description });
     setTitle('');
     setDescription('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
       <input
-        value={title}
-        onChange={e => setTitle(e.target.value)}
+        type="text"
         placeholder="Bug title"
-        required
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        style={{ padding: '0.5rem', marginRight: '0.5rem' }}
       />
-      <textarea
-        value={description}
-        onChange={e => setDescription(e.target.value)}
+      <input
+        type="text"
         placeholder="Bug description"
-        required
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        style={{ padding: '0.5rem', marginRight: '0.5rem' }}
       />
-      <button type="submit">Add Bug</button>
+      <button type="submit" style={{ padding: '0.5rem 1rem' }}>
+        Add Bug
+      </button>
     </form>
   );
-}
+};
 
 export default BugForm;

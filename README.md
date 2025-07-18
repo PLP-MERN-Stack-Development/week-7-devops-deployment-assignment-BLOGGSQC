@@ -4,8 +4,8 @@
 A simple bug tracking application with full-stack MERN deployment.
 
 ##  Live Links
-- 🔗 Frontend: https://your-frontend.vercel.app
-- 🔗 Backend API: https://your-backend.onrender.com/api/bugs
+Frontend: 
+Backend API:
 
 ##  Tech Stack
 - React + Vite
@@ -26,9 +26,9 @@ See `.github/workflows/ci.yml` for test and build automation.
 ##  Environment
 See `.env.example` and configure accordingly.
 
-##  Maintenance Plan
-- Weekly security patch checks
-- Monthly database backups
-- Documented rollback procedures
+# Maintenance Plan
+Weekly security patch checks
+Monthly database backups
+Documented rollback procedures
 
 ---
